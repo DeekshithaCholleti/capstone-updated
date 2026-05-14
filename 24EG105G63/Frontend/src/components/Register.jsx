@@ -55,7 +55,7 @@ function Register() {
       }
     } catch (err) {
       console.log('err in registration', err)
-      setApiError(err.response?.data?.error || 'Registration failed')
+      setApiError(err.response?.data?.error || err.response?.data?.message || 'Registration failed')
     } finally {
       setLoading(false)
     }
@@ -69,8 +69,7 @@ function Register() {
         <h2 className={formTitle}>Create an Account</h2>
 
         {/* API Error */}
-        {apiError && <p className="text-red-500">{errorClass} </p>}
-        {/* {apiError && <p className={errorClass}>{apiError}</p>} */}
+        {apiError && <p className={errorClass}>{apiError}</p>}
 
         <form onSubmit={handleSubmit(onUserRegister)}>
           {/* ROLE */}

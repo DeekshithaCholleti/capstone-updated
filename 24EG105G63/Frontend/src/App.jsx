@@ -20,7 +20,7 @@ import ProtectedRoute from '../src/components/ProtectedRoute'
 function App() {
   const routerObj = createBrowserRouter([
     {
-      path: '/',
+      path: '/',  
       element: <Root />,
       children: [
         {

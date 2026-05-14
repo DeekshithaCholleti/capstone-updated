@@ -10,23 +10,28 @@ import cors from 'cors'
 
 const app = exp()
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.CLIENT_URL,
+  process.env.VITE_URL
+].filter(Boolean)
+
+app.set('trust proxy', process.env.NODE_ENV === 'production')
 
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'https://atp-24-eg-105-g63-blogg-git-035ccb-deekshis-projects-7e082507.vercel.app',
-      'https://atp-24-eg-105-g63-blogg-app.vercel.app'  // ← add this
-    ],
+    origin: allowedOrigins,
     credentials: true
-   })
- )
+  })
+)
 
 //add cookie parser middleware
 app.use(cookieParser())
 
 //body parser middleware
 app.use(exp.json())
+
+app.get('/', (req, res) => res.send('Blog API is running'))
 
 //path level middleware
 app.use('/user-api', userApp)
